@@ -10,13 +10,19 @@ cybership/
   frontend/    # Next.js 14 App Router + shadcn/ui
   backend/     # NestJS + Prisma + PostgreSQL
 
+## Feature Highlights
+- **Interactive API Docs (Swagger)**: The backend serves a fully documented OpenAPI specification at `/api/docs` mapping out the unified `RateRequest` and session endpoints.
+- **Modern UI Components**: The frontend is built with heavily customized **shadcn/ui** components and Tailwind CSS, creating a sleek, accessible, and responsive user experience.
+- **Robust Input Validation**: Strict payload validation using `class-validator` and `zod` ensures that 100% of data is sanitized before it ever hits a carrier network.
+- **Docker Ready**: Includes a `docker-compose` setup for instantly spinning up the PostgreSQL database.
+
 ## Architecture Decisions
-- Capability-Based Carrier Engine: Every carrier implements a `capabilities` map. Adding **FedEx** or new operations like **Tracking** never touches existing UPS rating code.
-- OAuth 2.0 Persistence & Refresh: Full token lifecycle management (Acquire -> Store -> Refresh) is handled transparently in the background.
-- UPS v2409 Compliance: Strictly follows the latest UPS Rating API docs, including mandatory `ShopTimeInTransit` implementation.
-- Error Handling: Structured, machine-readable `CarrierError` responses with global HTTP status mapping.
-- Integration Testing: High-fidelity end-to-end tests using stubbed HTTP responses based on realistic carrier payloads.
-- Cookies: Anonymous session tracking via signed HttpOnly cookies for a frictionless user experience.
+- **Capability-Based Carrier Engine**: Every carrier implements a `capabilities` map. Adding FedEx or new operations like Tracking never touches existing UPS rating code.
+- **OAuth 2.0 Persistence & Refresh**: Full token lifecycle management (Acquire -> Store -> Refresh) is handled transparently in the background.
+- **UPS v2409 Compliance**: Strictly follows the latest UPS Rating API docs, including mandatory `ShopTimeInTransit` implementation.
+- **Error Handling**: Structured, machine-readable `CarrierError` responses with global HTTP status mapping.
+- **Integration Testing**: High-fidelity end-to-end tests using stubbed HTTP responses based on realistic carrier payloads.
+- **Cookies**: Anonymous session tracking via signed HttpOnly cookies for a frictionless user experience.
 
 ## Prerequisites
 - Node.js >= 18

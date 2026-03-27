@@ -8,6 +8,7 @@ This project was built to demonstrate a modular and extensible architecture for 
 - **Normalized Domain Models**: A clean abstraction that hides the complexity of carrier-specific APIs (JSON/XML).
 - **Secure Authentication**: UPS OAuth 2.0 implementation with token caching, reuse, and automatic refresh.
 - **Pluggable Architecture**: Easy to add new carriers or operations (FedEx, USPS, Label Generation) without modifying core logic.
+- **Interactive API Docs**: Fully compliant OpenAPI/Swagger specification served natively at `/api/docs`.
 - **Robust Error Handling**: Structured, domain-specific errors for common carrier failure modes (Auth, Rate Limiting, Timeouts).
 - **History Tracking**: All rate requests and quotes are persisted for audit and performance analysis.
 
