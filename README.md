@@ -26,7 +26,7 @@ cybership/
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/YOUR_USERNAME/cybership.git
+git clone https://github.com/aarogyaojha/cybership.git
 cd cybership
 cd backend && npm install
 cd ../frontend && npm install
