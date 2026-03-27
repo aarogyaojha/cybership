@@ -2,32 +2,22 @@ import { RateRequest, RateQuote } from '@prisma/client';
 
 export const CARRIERS = 'CARRIERS';
 
-/**
- * Interface for carriers that support shipping rate calculation.
- */
+// Provider for calculating shipping rates
 export interface IRateProvider {
   getRates(request: RateRequest): Promise<RateQuote[]>;
 }
 
-/**
- * Interface for carriers that support shipment tracking.
- */
+// Provider for fetching tracking info
 export interface ITrackingProvider {
   getTracking(trackingId: string): Promise<any>;
 }
 
-/**
- * Interface for carriers that support shipping label generation.
- */
+// Provider for label generation
 export interface ILabelProvider {
   createLabel(request: any): Promise<any>;
 }
 
-/**
- * Unified Carrier interface that maps a unique carrier ID to its supported operations.
- * New operations (e.g. tracking, labels) can be added as optional capabilities 
- * without breaking existing rating functionality.
- */
+// Maps carrier ID to operations so we can easily bolt on things like tracking later
 export interface ICarrier {
   readonly carrierId: string;
   readonly capabilities: {

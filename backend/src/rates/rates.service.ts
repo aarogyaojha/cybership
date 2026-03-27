@@ -32,12 +32,12 @@ export class RatesService {
     // Aggregate rates from all carriers
     for (const carrier of this.carriers) {
       try {
-        if (carrier.capabilities.rates) {
+        if (carrier?.capabilities?.rates) {
           const carrierQuotes = await carrier.capabilities.rates.getRates(request);
           allQuotes.push(...carrierQuotes);
         }
       } catch (err) {
-        this.logger.error(`Failed to get rates for ${carrier.carrierId}: ${err.message}`, err.stack);
+        this.logger.error(`Failed to get rates for ${carrier?.carrierId}: ${err.message}`, err.stack);
       }
     }
 

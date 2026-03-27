@@ -13,7 +13,12 @@ describe('Session (e2e)', () => {
     rateQuote: { createMany: jest.fn() }
   };
   let upsMock = {
-    getRates: jest.fn().mockResolvedValue([])
+    carrierId: 'UPS',
+    capabilities: {
+      rates: {
+        getRates: jest.fn().mockResolvedValue([])
+      }
+    }
   };
 
   beforeAll(async () => {

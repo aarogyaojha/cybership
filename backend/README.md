@@ -32,7 +32,7 @@ Auth tokens are treated as a shared resource.
 - The service only makes a network call to UPS for a new token if the current one is missing or expired.
 
 ### 4. Error Handling
-We uses a custom `CarrierError` class that maps carrier-specific HTTP statuses (429, 401, etc.) into a consistent format. This allows the frontend to provide meaningful feedback (e.g., "Rate limit exceeded" vs "General Error").
+Uses a custom `CarrierError` class that maps carrier-specific HTTP statuses (429, 401, etc.) into a consistent format. This allows the frontend to provide meaningful feedback (e.g., "Rate limit exceeded" vs "General Error").
 
 ---
 
@@ -99,7 +99,3 @@ Given more time, I would:
 3. **Advanced Caching**: Cache identical rate requests (same origin/dest/weight) for a short duration to save API costs.
 4. **Performance Monitoring**: Add instrumentation to track carrier latency and error rates.
 5. **Circuit Breaker**: Implement circuit breakers for carriers that are intermittently failing to prevent cascading failures.
-
----
-
-*Good luck with the evaluation!*

@@ -10,9 +10,7 @@ import { randomUUID } from 'node:crypto';
 const UPS_RATING_ENDPOINT = '/api/rating/v2409/Shoptimeintransit';
 const UPS_RATING_TIMEOUT_MS = 15000;
 
-/**
- * Mapping of UPS numeric service codes to human-readable labels.
- */
+// UPS service code mappings
 const UPS_SERVICE_LABELS: Record<string, string> = {
   '01': 'UPS Next Day Air',
   '02': 'UPS 2nd Day Air',
@@ -45,10 +43,7 @@ export class UpsRatesService {
     private readonly upsAuth: UpsAuthService,
   ) {}
 
-  /**
-   * Fetches shipping rates from UPS for the given request.
-   * Validates input before making the external call.
-   */
+  // Get shipping rates from UPS
   async getRates(request: RateRequest): Promise<RateQuote[]> {
     this.validateRequest(request);
 

@@ -19,20 +19,18 @@ export class UpsAuthService {
     private readonly prisma: PrismaService,
   ) {}
 
-  /**
-   * Retrieves a valid OAuth token, either from cache, via refresh flow, or fresh acquisition.
-   */
+  // Gets a valid token (cached, via refresh, or new login)
   async getToken(): Promise<string> {
     const existing = await this.prisma.authToken.findUnique({
       where: { carrier: this.CARRIER_ID },
     });
 
-    // Case 1: Token exists and is still valid (with safety margin)
+    // Use cached if valid
     if (existing && existing.expiresAt > new Date(Date.now() + TOKEN_EXPIRY_THRESHOLD_MS)) {
       return existing.accessToken;
     }
 
-    // Case 2: Try refreshing if we have a refresh token
+    // Try refreshing
     if (existing?.refreshToken) {
       try {
         return await this.useRefreshToken(existing.refreshToken);
@@ -41,7 +39,7 @@ export class UpsAuthService {
       }
     }
 
-    // Case 3: Fresh login via client_credentials
+    // Fallback to fresh login
     return this.acquireToken();
   }
 
@@ -113,7 +111,7 @@ export class UpsAuthService {
     const expiresInSeconds = parseInt(data.expires_in, 10);
     const expiresAt = new Date(Date.now() + expiresInSeconds * 1000);
 
-    // Persist to DB for reuse across instances
+    // Save to DB
     await this.prisma.authToken.upsert({
       where: { carrier: this.CARRIER_ID },
       update: {
