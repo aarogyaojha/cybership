@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { Package, History, Zap, ShieldCheck, Sparkles } from "lucide-react";
+import { Package, History, Zap, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
 
 export default function Home() {
   const [rates, setRates] = useState<any[]>([]);
@@ -18,9 +18,12 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="rounded-3xl border border-slate-200 bg-white px-8 py-6 shadow-lg">
-          Loading...
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="relative">
+          <div className="h-24 w-24 rounded-full border-t-2 border-primary animate-spin" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-xs font-bold uppercase tracking-widest text-primary">RL</span>
+          </div>
         </div>
       </div>
     );
@@ -28,105 +31,103 @@ export default function Home() {
 
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen bg-slate-50">
-        <div className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[28rem] bg-gradient-to-r from-sky-200/70 via-white to-indigo-200/70 blur-3xl" />
-          <div className="container mx-auto px-6 py-24">
-            <div className="grid gap-12 xl:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="max-w-2xl">
-                <Badge className="mb-6" variant="default">
-                  Shipping SaaS
-                </Badge>
-                <h1 className="text-5xl font-extrabold tracking-tight text-slate-950 sm:text-6xl">
-                  Compare carrier rates in seconds.
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-slate-600">
-                  RateLane gives you one dashboard for instant shipping quotes,
-                  rate history, and admin-level visibility.
-                </p>
-                <div className="mt-10 flex flex-wrap gap-4">
-                  <Link href="/register">
-                    <Button size="lg">Get started</Button>
-                  </Link>
-                  <Link href="/login">
-                    <Button size="lg" variant="outline">
-                      Login
-                    </Button>
-                  </Link>
-                </div>
+      <main className="min-h-screen relative overflow-hidden">
+        {/* Background glow effects */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/20 blur-[120px] rounded-full -z-10 opacity-30" />
+        
+        <div className="container mx-auto px-6 pt-24 pb-32">
+          <div className="grid gap-16 xl:grid-cols-[1.2fr_0.8fr] items-center">
+            <div className="max-w-3xl space-y-8">
+              <Badge className="px-4 py-1.5 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors" variant="outline">
+                <Sparkles className="h-3.5 w-3.5 mr-2" />
+                Evolution of Shipping
+              </Badge>
+              
+              <h1 className="text-6xl font-black tracking-tight leading-[1.1] sm:text-7xl">
+                Compare carrier rates <br />
+                <span className="gradient-text">in real-time.</span>
+              </h1>
+              
+              <p className="max-w-xl text-xl leading-relaxed text-muted-foreground">
+                The most powerful dashboard for instant shipping quotes, 
+                predictive rate history, and enterprise-grade visibility.
+              </p>
+              
+              <div className="flex flex-wrap gap-6 pt-4">
+                <Link href="/register">
+                  <Button size="lg" className="h-14 px-10 text-lg bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/20 group">
+                    Get Started Free
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-white/10 hover:bg-white/5">
+                    View Demo
+                  </Button>
+                </Link>
               </div>
+            </div>
 
-              <div className="rounded-[2rem] border border-slate-200/80 bg-white/95 p-8 shadow-2xl shadow-slate-200/70">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 rounded-3xl bg-slate-50 p-5">
-                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-sky-100 text-sky-700">
-                      <Zap className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-slate-500">
-                        Live shipping rates
-                      </p>
-                      <p className="mt-1 text-base font-semibold text-slate-900">
-                        Compare UPS and more with one request
-                      </p>
-                    </div>
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-[2.5rem] blur-2xl group-hover:opacity-100 transition duration-1000 group-hover:duration-200 opacity-50" />
+              <div className="relative glass-card rounded-[2.5rem] p-10 space-y-8 group-hover:border-primary/20 transition-all duration-500">
+                <div className="flex items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 glass-card-hover">
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20 text-primary">
+                    <Zap className="h-7 w-7" />
                   </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="rounded-3xl border border-slate-200/80 bg-white p-4">
-                      <p className="text-sm text-slate-500">Fast quotes</p>
-                      <p className="mt-2 text-lg font-semibold text-slate-900">
-                        Seconds per shipment
-                      </p>
-                    </div>
-                    <div className="rounded-3xl border border-slate-200/80 bg-white p-4">
-                      <p className="text-sm text-slate-500">User-friendly</p>
-                      <p className="mt-2 text-lg font-semibold text-slate-900">
-                        Secure account access
-                      </p>
-                    </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Live updates</p>
+                    <p className="text-lg font-semibold">Multi-carrier Engine</p>
+                  </div>
+                </div>
+                
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="p-6 rounded-2xl bg-white/5 border border-white/5 glass-card-hover">
+                    <ShieldCheck className="h-6 w-6 text-emerald-400 mb-4" />
+                    <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">Security</p>
+                    <p className="text-xl font-bold">Bank-level Auth</p>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/5 border border-white/5 glass-card-hover">
+                    <History className="h-6 w-6 text-sky-400 mb-4" />
+                    <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">History</p>
+                    <p className="text-xl font-bold">Instant Audit</p>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="mt-20 grid gap-6 md:grid-cols-3">
-              <Card className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
-                <div className="flex items-center gap-3">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-sky-700">
-                    <Package className="h-5 w-5" />
-                  </div>
-                  <CardTitle className="text-base">Multi-Carrier</CardTitle>
+          <div className="mt-40 grid gap-8 md:grid-cols-3">
+            {[
+              { 
+                icon: Package, 
+                title: "Unified Interface", 
+                desc: "One dashboard for UPS, FedEx, and DHL. No more jumping between tabs.",
+                color: "text-blue-400"
+              },
+              { 
+                icon: Sparkles, 
+                title: "Dynamic Workflow", 
+                desc: "Smart routing suggestions based on weight, dimensions, and destination.",
+                color: "text-purple-400"
+              },
+              { 
+                icon: ShieldCheck, 
+                title: "Secure Controls", 
+                desc: "Admin-level permissions and detailed audit logs for your entire organization.",
+                color: "text-emerald-400"
+              }
+            ].map((feature, i) => (
+              <div key={i} className="glass-card rounded-3xl p-8 glass-card-hover">
+                <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 ${feature.color} mb-6`}>
+                  <feature.icon className="h-6 w-6" />
                 </div>
-                <p className="mt-4 text-sm leading-6 text-slate-600">
-                  One interface for UPS, rate comparison, and shipping
-                  workflows.
+                <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {feature.desc}
                 </p>
-              </Card>
-              <Card className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
-                <div className="flex items-center gap-3">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700">
-                    <Sparkles className="h-5 w-5" />
-                  </div>
-                  <CardTitle className="text-base">Simple workflow</CardTitle>
-                </div>
-                <p className="mt-4 text-sm leading-6 text-slate-600">
-                  Enter shipment details, get instant quotes, and keep your
-                  history.
-                </p>
-              </Card>
-              <Card className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
-                <div className="flex items-center gap-3">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
-                    <ShieldCheck className="h-5 w-5" />
-                  </div>
-                  <CardTitle className="text-base">Secure access</CardTitle>
-                </div>
-                <p className="mt-4 text-sm leading-6 text-slate-600">
-                  Built-in JWT auth, admin controls, and audit logging for every
-                  user.
-                </p>
-              </Card>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </main>
@@ -134,78 +135,89 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <div className="container mx-auto px-6 py-12 max-w-6xl">
-        <div className="grid gap-8 xl:grid-cols-[0.95fr_0.8fr]">
-          <section className="space-y-6 rounded-[2rem] border border-slate-200 bg-white/95 p-8 shadow-2xl shadow-slate-200/60">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-sm font-medium uppercase tracking-[0.24em] text-sky-600">
-                  Ship smarter
-                </p>
-                <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-                  Get instant quotes for every shipment.
-                </h1>
-                <p className="mt-4 max-w-2xl text-slate-600">
-                  Enter shipment details below to compare carrier rates, and
-                  keep your history available for later review.
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-3xl bg-slate-950 px-5 py-4 text-white shadow-lg">
-                  <p className="text-xs uppercase tracking-[0.24em] text-slate-300">
-                    Quick quote
-                  </p>
-                  <p className="mt-2 text-xl font-semibold">Instant results</p>
-                </div>
-                <div className="rounded-3xl bg-slate-950 px-5 py-4 text-white shadow-lg">
-                  <p className="text-xs uppercase tracking-[0.24em] text-slate-300">
-                    Safe access
-                  </p>
-                  <p className="mt-2 text-xl font-semibold">JWT auth</p>
-                </div>
-              </div>
-            </div>
+    <main className="min-h-screen py-10">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <header className="mb-12 space-y-4">
+          <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 px-3 py-1">
+            Authenticated Access
+          </Badge>
+          <h1 className="text-5xl font-black tracking-tight leading-tight">
+            Get instant quotes <br />
+            <span className="gradient-text">for your shipments.</span>
+          </h1>
+        </header>
 
-            <div className="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6">
-              <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-                Shipment details
-              </p>
+        <div className="grid gap-10 xl:grid-cols-[1fr_380px]">
+          <div className="space-y-10">
+            <section className="glass-card rounded-[2.5rem] p-10 overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] rounded-full -mr-20 -mt-20 -z-10" />
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground">
+                  Shipment Engine v1.2
+                </h2>
+              </div>
               <RateForm onRatesFetched={setRates} />
-            </div>
-          </section>
+            </section>
 
-          <aside className="space-y-6">
-            <Card className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl">
-              <CardTitle className="text-xl">Recent quotes</CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Review your last rate searches and pick the best carrier option.
+            <section className="glass-card rounded-[2.5rem] p-8">
+               <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold">Instant Results</h2>
+                {rates.length > 0 && (
+                  <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                    {rates.length} rates found
+                  </Badge>
+                )}
+              </div>
+              <RateTable rates={rates} />
+            </section>
+          </div>
+
+          <aside className="space-y-8">
+            <div className="glass-card rounded-[2rem] p-8 space-y-6">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <History className="h-5 w-5 text-primary" />
+                Recent History
+              </h3>
+              <div className="space-y-4">
+                <div className="p-4 rounded-xl bg-white/5 border border-white/5 shimmer">
+                  <p className="text-xs font-bold text-muted-foreground uppercase mb-1">Statistics</p>
+                  <p className="text-2xl font-black gradient-text">42 Active Quotes</p>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Review your last searches and pick the best carrier option instantly.
+                </p>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-[2rem] p-8 space-y-6">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5 text-emerald-400" />
+                Platform Security
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                All rate requests are secured with JWT and stored with detailed audit trails.
               </p>
-            </Card>
-            <Card className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl">
-              <CardTitle className="text-xl">History & insights</CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Your submitted rate requests are automatically stored for audit
-                and reporting.
-              </p>
-            </Card>
+              <Button variant="outline" className="w-full border-white/10 hover:bg-white/5">
+                View Audit Guidelines
+              </Button>
+            </div>
           </aside>
         </div>
 
-        <div className="mt-10 rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-2xl shadow-slate-200/50">
-          <RateTable rates={rates} />
-        </div>
-
-        <section className="mt-10 rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-2xl shadow-slate-200/50">
-          <h2 className="text-2xl font-semibold text-slate-950">
-            Your recent quotes
-          </h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Quickly scan the most recent rate requests from your account.
-          </p>
-          <div className="mt-6">
-            <HistoryTable />
+        <section className="mt-16 glass-card rounded-[2.5rem] p-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div>
+              <h2 className="text-3xl font-black tracking-tight">Search History</h2>
+              <p className="text-muted-foreground mt-2">
+                Tracking your last 50 shipping rate computations.
+              </p>
+            </div>
+            <Button variant="secondary" className="bg-white/5 hover:bg-white/10 border-white/10">
+              Export History (CSV)
+            </Button>
           </div>
+          <HistoryTable />
         </section>
       </div>
 
@@ -213,3 +225,4 @@ export default function Home() {
     </main>
   );
 }
+

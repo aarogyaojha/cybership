@@ -15,54 +15,67 @@ export function NavBar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 glass border-b border-white/5 shadow-2xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight text-slate-900"
+          className="flex items-center gap-3 text-xl font-bold tracking-tight group"
         >
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white shadow-sm">
-            R
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+            RL
           </span>
-          RateLane
+          <span className="gradient-text">RateLane</span>
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-3 text-sm">
+        <div className="flex items-center gap-4">
           {isAuthenticated ? (
             <>
-              <div className="hidden items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-slate-700 sm:flex">
-                <span>{user?.email}</span>
+              <div className="hidden items-center gap-3 rounded-full bg-white/5 border border-white/10 px-4 py-1.5 text-sm sm:flex">
+                <span className="text-muted-foreground">{user?.email}</span>
                 {user?.role === "admin" && (
-                  <span className="rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">
-                    ADMIN
+                  <span className="rounded-full bg-primary/20 border border-primary/30 px-2 py-0.5 text-[10px] font-bold text-primary uppercase tracking-wider">
+                    Admin
                   </span>
                 )}
               </div>
               {user?.role === "admin" && (
                 <Link href="/admin">
-                  <Button variant="outline" size="sm">
+                  <Button variant="ghost" size="sm" className="hover:bg-white/10">
                     Dashboard
                   </Button>
                 </Link>
               )}
-              <Button variant="secondary" size="sm" onClick={handleLogout}>
+              <Link href="http://localhost:3000/api/docs" target="_blank">
+                <Button variant="ghost" size="sm" className="hover:bg-white/10 text-primary font-bold">
+                  API Docs
+                </Button>
+              </Link>
+              <Button 
+                variant="secondary" 
+                size="sm" 
+                onClick={handleLogout}
+                className="bg-white/5 hover:bg-white/10 border-white/10"
+              >
                 Logout
               </Button>
             </>
           ) : (
-            <>
+            <div className="flex items-center gap-3">
               <Link href="/login">
-                <Button variant="outline" size="sm">
+                <Button variant="ghost" size="sm" className="hover:bg-white/5 text-muted-foreground hover:text-foreground">
                   Login
                 </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm">Register</Button>
+                <Button size="sm" className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 px-6">
+                  Register
+                </Button>
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>
     </nav>
   );
 }
+

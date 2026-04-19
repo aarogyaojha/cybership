@@ -109,8 +109,8 @@ export function RateForm({
         {/* ZIP Codes */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <MapPin className="w-4 h-4 text-blue-400" />
-            <span className="section-label">Route</span>
+            <MapPin className="w-4 h-4 text-primary" />
+            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">Route</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
@@ -125,7 +125,7 @@ export function RateForm({
                     <Input
                       placeholder="90210"
                       {...field}
-                      className="bg-secondary/50 border-border/60 focus:border-blue-500/60 focus:bg-secondary/80 transition-all duration-200 mono placeholder:text-muted-foreground/40"
+                      className="bg-white/5 border-white/5 focus:border-primary/50 focus:bg-white/10 transition-all duration-200 mono placeholder:text-white/20"
                     />
                   </FormControl>
                   <FormMessage />
@@ -144,7 +144,7 @@ export function RateForm({
                     <Input
                       placeholder="10001"
                       {...field}
-                      className="bg-secondary/50 border-border/60 focus:border-blue-500/60 focus:bg-secondary/80 transition-all duration-200 mono placeholder:text-muted-foreground/40"
+                      className="bg-white/5 border-white/5 focus:border-primary/50 focus:bg-white/10 transition-all duration-200 mono placeholder:text-white/20"
                     />
                   </FormControl>
                   <FormMessage />
@@ -157,11 +157,8 @@ export function RateForm({
         {/* Weight & Dimensions */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <Weight className="w-4 h-4 text-violet-400" />
-            <span className="section-label">Weight & Dimensions</span>
-            <span className="text-xs text-muted-foreground/60 ml-1">
-              (optional)
-            </span>
+            <Weight className="w-4 h-4 text-accent" />
+            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">Weight & Dimensions</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <FormField
@@ -177,7 +174,7 @@ export function RateForm({
                       type="number"
                       step="0.1"
                       {...field}
-                      className="bg-secondary/50 border-border/60 focus:border-violet-500/60 focus:bg-secondary/80 transition-all duration-200 mono"
+                      className="bg-white/5 border-white/5 focus:border-accent/50 focus:bg-white/10 transition-all duration-200 mono"
                     />
                   </FormControl>
                   <FormMessage />
@@ -197,7 +194,7 @@ export function RateForm({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
-                      className="bg-secondary/50 border-border/60 focus:border-violet-500/60 focus:bg-secondary/80 transition-all duration-200 mono"
+                      className="bg-white/5 border-white/5 focus:border-accent/50 focus:bg-white/10 transition-all duration-200 mono"
                     />
                   </FormControl>
                   <FormMessage />
@@ -217,7 +214,7 @@ export function RateForm({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
-                      className="bg-secondary/50 border-border/60 focus:border-violet-500/60 focus:bg-secondary/80 transition-all duration-200 mono"
+                      className="bg-white/5 border-white/5 focus:border-accent/50 focus:bg-white/10 transition-all duration-200 mono"
                     />
                   </FormControl>
                   <FormMessage />
@@ -237,7 +234,7 @@ export function RateForm({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
-                      className="bg-secondary/50 border-border/60 focus:border-violet-500/60 focus:bg-secondary/80 transition-all duration-200 mono"
+                      className="bg-white/5 border-white/5 focus:border-accent/50 focus:bg-white/10 transition-all duration-200 mono"
                     />
                   </FormControl>
                   <FormMessage />
@@ -251,7 +248,7 @@ export function RateForm({
         <div>
           <div className="flex items-center gap-2 mb-3">
             <Ruler className="w-4 h-4 text-emerald-400" />
-            <span className="section-label">Service Level</span>
+            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">Service Level</span>
           </div>
           <FormField
             control={form.control}
@@ -263,11 +260,11 @@ export function RateForm({
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="bg-secondary/50 border-border/60 focus:border-emerald-500/60 transition-all duration-200">
+                    <SelectTrigger className="bg-white/5 border-white/5 focus:border-emerald-500/50 focus:ring-0 transition-all duration-200">
                       <SelectValue placeholder="All Services" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-card border-border">
+                  <SelectContent className="bg-card/90 backdrop-blur-xl border-white/10">
                     <SelectItem value="">All Services</SelectItem>
                     <SelectItem value="03">UPS Ground</SelectItem>
                     <SelectItem value="02">UPS 2nd Day Air</SelectItem>
@@ -283,20 +280,21 @@ export function RateForm({
         <Button
           type="submit"
           disabled={loading}
-          className="w-full h-11 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 border-0 font-semibold tracking-wide transition-all duration-200 shadow-lg shadow-blue-900/30 hover:shadow-blue-900/50 hover:scale-[1.01] active:scale-[0.99]"
+          className="w-full h-14 bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/20"
         >
           {loading ? (
             <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Fetching Rates...
+              <Loader2 className="w-5 h-5 mr-3 animate-spin" />
+              Computing Best Rates...
             </>
           ) : (
             <>
-              <span>Get Rates</span>
-              <ChevronRight className="w-4 h-4 ml-2" />
+              <span className="text-lg">Get Instant Quotes</span>
+              <ChevronRight className="w-5 h-5 ml-2" />
             </>
           )}
         </Button>
+
       </form>
     </Form>
   );

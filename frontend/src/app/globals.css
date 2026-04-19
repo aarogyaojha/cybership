@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
+    --background: 224 71% 4%;
     --foreground: 213 31% 91%;
-    --card: 222 40% 9%;
+    --card: 224 71% 7%;
     --card-foreground: 213 31% 91%;
-    --popover: 222 40% 9%;
+    --popover: 224 71% 5%;
     --popover-foreground: 213 31% 91%;
     --primary: 217 91% 60%;
     --primary-foreground: 222 47% 6%;
-    --secondary: 222 30% 14%;
+    --secondary: 222 47% 11%;
     --secondary-foreground: 213 31% 91%;
-    --muted: 222 30% 14%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 222 47% 11%;
+    --muted-foreground: 215 20% 65%;
     --accent: 262 83% 68%;
     --accent-foreground: 222 47% 6%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 222 30% 16%;
-    --input: 222 30% 14%;
+    --border: 222 47% 15%;
+    --input: 222 47% 11%;
     --ring: 217 91% 60%;
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 
   * {
@@ -34,75 +34,84 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 20% 0%, hsla(217, 91%, 60%, 0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 0%, hsla(262, 83%, 68%, 0.07) 0%, transparent 50%);
+    background-image: 
+      radial-gradient(circle at 10% 20%, hsla(217, 91%, 60%, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, hsla(262, 83%, 68%, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, hsla(222, 47% , 11%, 0.3) 0%, transparent 100%);
     background-attachment: fixed;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
 
 @layer utilities {
   .glass {
-    background: hsla(222, 40%, 9%, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid hsla(213, 31%, 91%, 0.07);
+    @apply bg-card/60 backdrop-blur-xl border border-white/10;
   }
 
-  .glass-hover {
-    transition: all 0.2s ease;
+  .glass-card {
+    background: linear-gradient(135deg, hsla(224, 71%, 10%, 0.6) 0%, hsla(224, 71%, 5%, 0.6) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsla(213, 31%, 91%, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
-  .glass-hover:hover {
-    background: hsla(222, 40%, 12%, 0.85);
-    border-color: hsla(217, 91%, 60%, 0.25);
-    box-shadow: 0 0 24px hsla(217, 91%, 60%, 0.07);
+
+  .glass-card-hover {
+    @apply transition-all duration-300 hover:border-primary/30 hover:shadow-primary/5 hover:translate-y-[-2px];
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(217, 91%, 65%) 0%, hsl(262, 83%, 72%) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400;
   }
 
-  .glow-blue {
-    box-shadow: 0 0 40px hsla(217, 91%, 60%, 0.1);
+  .gradient-border {
+    position: relative;
+    border-radius: var(--radius);
+    padding: 1px;
+    background: linear-gradient(135deg, hsla(217, 91%, 60%, 0.3), hsla(262, 83%, 68%, 0.3));
+    z-index: 0;
   }
 
-  .mono {
-    font-family: 'Courier New', Courier, monospace;
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: hsl(var(--card));
+    border-radius: calc(var(--radius) - 1px);
+    z-index: -1;
   }
 
-  .section-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: hsl(215, 20%, 55%);
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  .animate-fade-in {
-    animation: fadeIn 0.4s ease forwards;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 
-  .animate-slide-up {
-    animation: slideUp 0.4s ease forwards;
+  .shimmer {
+    position: relative;
+    overflow: hidden;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    animation: shimmer 3s infinite;
   }
 
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
   }
-
-  .card-row-hover {
-    transition: background 0.15s ease;
-  }
-  .card-row-hover:hover {
-    background: hsla(217, 91%, 60%, 0.05);
-  }
-}
+}

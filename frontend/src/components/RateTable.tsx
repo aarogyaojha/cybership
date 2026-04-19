@@ -41,51 +41,52 @@ export function RateTable({ rates }: { rates: any[] }) {
           return (
             <div
               key={rate.id}
-              className={`glass rounded-xl p-4 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 card-row-hover transition-all duration-200 ${
-                isBest ? "border border-emerald-500/25 shadow-[0_0_20px_hsla(152,76%,40%,0.07)]" : ""
+              className={`glass-card rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-card-hover transition-all duration-300 ${
+                isBest ? "border-primary/30 bg-primary/5 shadow-2xl shadow-primary/10" : "border-white/5"
               }`}
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-5">
                 {/* Rank */}
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
-                  isBest ? "bg-emerald-500/20 text-emerald-400" : "bg-secondary text-muted-foreground"
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-black flex-shrink-0 border ${
+                  isBest ? "bg-primary/20 text-primary border-primary/30 shadow-lg shadow-primary/20" : "bg-white/5 text-muted-foreground border-white/10"
                 }`}>
                   {idx + 1}
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-semibold text-sm">{rate.carrier}</span>
-                    <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full ${style.bg} ${style.text}`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="font-bold text-base tracking-tight">{rate.carrier}</span>
+                    <span className={`inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg border ${style.bg} ${style.text} border-current/10`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${style.dot} animate-pulse`} />
                       {rate.serviceLabel}
                     </span>
                     {isBest && (
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
+                      <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-lg shadow-emerald-500/20">
                         Best Value
                       </span>
                     )}
                   </div>
 
                   {rate.estimatedDays && (
-                    <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
-                      <Clock className="w-3 h-3" />
+                    <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground font-medium">
+                      <Clock className="w-3.5 h-3.5 text-primary/70" />
                       {rate.estimatedDays} business {rate.estimatedDays === 1 ? "day" : "days"}
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 sm:text-right pl-11 sm:pl-0">
-                <DollarSign className="w-4 h-4 text-muted-foreground/50" />
-                <span className="mono text-xl font-bold">
+              <div className="flex items-center gap-2 sm:text-right pl-[52px] sm:pl-0">
+                <span className="text-muted-foreground/30 font-black text-xs uppercase tracking-tighter self-start mt-1.5">Rate</span>
+                <span className="mono text-3xl font-black gradient-text">
                   {rate.totalCharge}
                 </span>
-                <span className="text-xs text-muted-foreground">{rate.currency}</span>
+                <span className="text-xs font-bold text-muted-foreground self-end mb-1.5 tracking-widest uppercase">{rate.currency}</span>
               </div>
             </div>
           )
         })}
+
       </div>
     </div>
   )

@@ -8,12 +8,13 @@ export const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border bg-card text-card-foreground shadow",
+      "rounded-2xl border border-white/5 bg-card/50 text-card-foreground shadow-2xl backdrop-blur-sm",
       className,
     )}
     {...props}
   />
 ));
+
 export const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
