@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Cybership — Shipping Rate Comparison",
+  title: "RateLane — Shipping Rate Comparison",
   description: "Instantly compare shipping rates across major carriers",
 };
 
@@ -22,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`antialiased ${inter.className}`}>
+      <body
+        className={`min-h-screen bg-slate-50 text-slate-900 min-h-screen bg-slate-50 text-slate-900 antialiased ${inter.className}`}
+      >
         <Providers>
           <NavBar />
           {children}

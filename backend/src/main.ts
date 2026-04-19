@@ -7,13 +7,35 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
 async function bootstrap() {
+  const requiredEnv = [
+    'DATABASE_URL',
+    'JWT_SECRET',
+    'COOKIE_SECRET',
+    'BACKEND_URL',
+  ];
+
+  if (process.env.NODE_ENV === 'production') {
+    requiredEnv.push('ALLOWED_ORIGINS');
+  }
+
+  const missing = requiredEnv.filter((key) => !process.env[key]);
+  if (missing.length > 0) {
+    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  }
+
   const app = await NestFactory.create(AppModule);
+
+  if (process.env.NODE_ENV === 'production') {
+    app.getHttpAdapter().getInstance().set('trust proxy', 1);
+  }
 
   // Security middleware
   app.use(helmet());
 
   // CORS configuration
-  const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3001').split(',');
+  const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3001')
+    .split(',')
+    .map((origin) => origin.trim());
   app.enableCors({
     origin: allowedOrigins,
     credentials: true,
@@ -21,12 +43,19 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  app.use(cookieParser(process.env.COOKIE_SECRET));
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  const cookieSecret = process.env.COOKIE_SECRET!;
+  app.use(cookieParser(cookieSecret));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
   app.useGlobalFilters(new HttpExceptionFilter());
 
   const config = new DocumentBuilder()
-    .setTitle('Cybership API')
+    .setTitle('RateLane API')
     .setDescription('Shipping carrier rate integration and history API')
     .setVersion('1.0')
     .addTag('rates')

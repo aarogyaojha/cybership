@@ -1,7 +1,7 @@
-import { HistoryTable } from "@/components/HistoryTable"
-import { Toaster } from "@/components/ui/use-toast"
-import Link from "next/link"
-import { Package, ArrowLeft, History } from "lucide-react"
+import { HistoryTable } from "@/components/HistoryTable";
+import { Toaster } from "@/components/ui/use-toast";
+import Link from "next/link";
+import { Package, ArrowLeft, History } from "lucide-react";
 
 export default function HistoryPage() {
   return (
@@ -13,7 +13,9 @@ export default function HistoryPage() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg">
               <Package className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-lg tracking-tight gradient-text">Cybership</span>
+            <span className="font-bold text-lg tracking-tight gradient-text">
+              RateLane
+            </span>
           </div>
           <Link
             href="/"
@@ -32,8 +34,12 @@ export default function HistoryPage() {
             <History className="w-3 h-3" />
             Session history
           </div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Request History</h1>
-          <p className="text-muted-foreground text-lg">All shipment rate lookups from your current session.</p>
+          <h1 className="text-4xl font-bold tracking-tight mb-2">
+            Request History
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            All shipment rate lookups from your current session.
+          </p>
         </div>
 
         <HistoryTable />
@@ -41,5 +47,5 @@ export default function HistoryPage() {
 
       <Toaster />
     </main>
-  )
+  );
 }

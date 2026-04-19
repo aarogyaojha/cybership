@@ -15,48 +15,52 @@ export function NavBar() {
   };
 
   return (
-    <nav className="border-b bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="font-bold text-xl text-indigo-600">
-            Cybership
-          </Link>
+    <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl shadow-sm">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-lg font-semibold tracking-tight text-slate-900"
+        >
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white shadow-sm">
+            R
+          </span>
+          RateLane
+        </Link>
 
-          <div className="flex items-center gap-4">
-            {isAuthenticated ? (
-              <>
-                <div className="text-sm text-gray-600">
-                  {user?.email}
-                  {user?.role === "admin" && (
-                    <span className="ml-2 px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">
-                      Admin
-                    </span>
-                  )}
-                </div>
+        <div className="flex flex-1 items-center justify-end gap-3 text-sm">
+          {isAuthenticated ? (
+            <>
+              <div className="hidden items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-slate-700 sm:flex">
+                <span>{user?.email}</span>
                 {user?.role === "admin" && (
-                  <Link href="/admin">
-                    <Button variant="outline" size="sm">
-                      Dashboard
-                    </Button>
-                  </Link>
+                  <span className="rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">
+                    ADMIN
+                  </span>
                 )}
-                <Button variant="outline" size="sm" onClick={handleLogout}>
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/login">
+              </div>
+              {user?.role === "admin" && (
+                <Link href="/admin">
                   <Button variant="outline" size="sm">
-                    Login
+                    Dashboard
                   </Button>
                 </Link>
-                <Link href="/register">
-                  <Button size="sm">Register</Button>
-                </Link>
-              </>
-            )}
-          </div>
+              )}
+              <Button variant="secondary" size="sm" onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button size="sm">Register</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

@@ -1,4 +1,4 @@
-# Cybership — Carrier Integration Service
+# RateLane — Carrier Integration Service
 
 A production-grade shipping carrier integration service built with NestJS and TypeScript. This service provides a normalized interface for fetching shipping rates from multiple carriers (starting with UPS).
 
@@ -55,8 +55,8 @@ Uses a custom `CarrierError` class that maps carrier-specific HTTP statuses (429
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/aarogyaojha/cybership.git
-cd cybership
+git clone https://github.com/aarogyaojha/ratelane.git
+cd ratelane
 
 # Install dependencies for both folders
 cd backend && npm install

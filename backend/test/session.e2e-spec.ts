@@ -43,7 +43,7 @@ describe('Session (e2e)', () => {
     expect(res1.status).toBe(201);
     const setCookie = res1.headers['set-cookie'];
     expect(setCookie).toBeDefined();
-    expect(setCookie[0]).toContain('cybership_session=');
+    expect(setCookie[0]).toContain('ratelane_session=');
     
     const res2 = await request(app.getHttpServer())
       .post('/rates')

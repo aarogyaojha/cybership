@@ -1,6 +1,6 @@
-# Contributing to Cybership
+# Contributing to RateLane
 
-First off, thank you for considering contributing to Cybership! It's people like you that make Cybership such a great platform.
+First off, thank you for considering contributing to RateLane! It's people like you that make RateLane such a great platform.
 
 ## 1. Where do I go from here?
 
@@ -9,19 +9,22 @@ If you've noticed a bug or have a feature request, make sure to check our [Issue
 ## 2. Setting up your environment
 
 This project is a monorepo consisting of:
+
 - A `frontend` directory using Next.js
 - A `backend` directory using NestJS
 
 ### Prerequisites
+
 - Node.js 18+
 - PostgreSQL
 - Npm or Yarn
 
 ### Installation Steps
+
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/aarogyaojha/cybership.git
-   cd cybership
+   git clone https://github.com/aarogyaojha/ratelane.git
+   cd ratelane
    ```
 2. **Setup Backend:**
    ```bash

@@ -61,7 +61,7 @@ export class UpsRatesService {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
             transId,
-            transactionSrc: 'cybership',
+            transactionSrc: 'ratelane',
           },
           timeout: UPS_RATING_TIMEOUT_MS,
         })
